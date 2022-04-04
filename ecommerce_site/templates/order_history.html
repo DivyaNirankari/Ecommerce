@@ -33,6 +33,7 @@
                     <table class="table table-hover">
                         <thead>
                           <tr>
+                            <th scope="col"></th>
                             <th scope="col">Product</th>
                             <th scope="col">Delivered By</th>
                             <th scope="col">Status</th>
@@ -42,6 +43,7 @@
                         {% for product_data in order %}
                         <tbody>
                           <tr>
+                            {% comment %} <td><img src="{{product_data.product.product_image}}" alt="{{product_data.product.product}}"/></td> {% endcomment %}
                             <td>{{product_data.product.product}}</td>
                             <td>{{order_data.delivered_by}}</td>
                             <td>{{order_data.order_status}}</td>

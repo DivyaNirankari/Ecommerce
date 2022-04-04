@@ -14,7 +14,7 @@ urlpatterns = [
     #     ------------PRODUCTS---------
     path('view_all_products/', views.View_all_Products, name="view_all_products"),
     path('view_products/', views.view_Products, name="view_products"),
-    # view_products/product_by_category/catgegory_id
+    # view_products/product_by_category/category_id
     path('product_by_category/<str:pk>',
          views.Product_by_Category, name="product_by_category"),
     # path('product_by_category/',views.Product_Category,name="product_by_category"),
@@ -45,5 +45,6 @@ urlpatterns = [
          name="password_confirmed"),
     #     ---------NEWSLETTER SUBSCRIBE----------
     path('email_subscribe/', views.validate_email, name='email_subscribe'),
-    path('unsubscribe_newsletter/',views.Unsubscribe,name="unsubscribe_newsletter")
+    path('unsubscribe_newsletter/', views.Unsubscribe,
+         name="unsubscribe_newsletter")
 ]

@@ -27,6 +27,7 @@
          <h2>Shopping Cart</h2>
          <hr><br>
        </div>
+
             <div class="row">
                
                 <div class="col-md-10 col-lg-8">
@@ -56,7 +57,7 @@
                                                 <span>Price</span>
                                                 {% comment %} <p>{{cart.product.product_price}}</p> {% endcomment %}
                                                 <p>{{cart.get_total_cost}}</p>
-                                                {{cart.get}}
+                                               
                                             </div>
                                              <div class="col-md-3 price">
                                                 <br>
@@ -81,15 +82,15 @@
                         {% comment %} <div class="summary-item"><span class="text">Total MRP</span><span class="price">{{cart.product.product_price}}</span></div><hr> {% endcomment %}
                         
                         {% comment %} <div class="summary-item"><span class="text">Shipping</span><span class="price"></span></div><hr> {% endcomment %}
-                        <div class="summary-item"><span class="text">Total Amount</span><span class="price">{{cart.get_total_cost}}</span></div><hr>
-                        <a type="button" class="btn btn-primary btn-lg btn-block" href="{% url 'checkout'  %}">Checkout</a>
+                        <div class="summary-item"><span class="text">Total Amount</span><span class="price"> {{cart.get}}</span></div><hr>
+                        <a type="button" class="btn btn-primary btn-lg btn-block" href="{% url 'checkout'%}">Checkout</a>
                     </div>
                 </div>
                 {% else %}
                             <div class="col-sm-6 col-md-4 col-lg-4">
                                 <h6>Your Cart is Empty..  </h6><br>
                                 <div class="Add-data">
-                                    <button href="{% url 'wishlist_data' %}" class="btn btn-outline-danger">Add from Wishlist</button>
+                                    <a href="{% url 'wishlist_data' %}" class="btn btn-outline-danger">Add from Wishlist</a>
                                 </div>
                               </div><br><br>
                             {% endif %}

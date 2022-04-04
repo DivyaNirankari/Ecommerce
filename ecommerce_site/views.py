@@ -38,7 +38,7 @@ def Product_Category(request):
 
 def Order(request):
     cart = Cart.objects.filter(user=request.user.id)
-    total = Cart.objects.filter(user=request.user.id).count()
+    total = Cart.objects.filter(user=request.user.id,is_deleted=False).count()
     delivery_date = date.today()+datetime.timedelta(days=2)
     return render(request, "checkout.html", {'products': cart, 'total': total, 'delivery_date': delivery_date})
 
