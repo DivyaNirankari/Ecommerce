@@ -43,7 +43,8 @@
                         {% for product_data in order %}
                         <tbody>
                           <tr>
-                            {% comment %} <td><img src="{{product_data.product.product_image}}" alt="{{product_data.product.product}}"/></td> {% endcomment %}
+                            
+                            <td><img src="{{product_data.product.product_image.url}}" width="95px" height="95px" alt="{{product_data.product.product}}"/></td>
                             <td>{{product_data.product.product}}</td>
                             <td>{{order_data.delivered_by}}</td>
                             <td>{{order_data.order_status}}</td>

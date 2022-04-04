@@ -138,7 +138,8 @@ def Product_details(request, pk):
 
 
 @login_required
-def Add_to_Cart(request, product_id):
+def Add_to_Cart(request, product_id,):
+    # print(qty)
     product = Product.objects.get(id=product_id)
     if(Cart.objects.filter(product=product, user_id=request.user.id).exists()):
         add_cart = Cart.objects.filter(
