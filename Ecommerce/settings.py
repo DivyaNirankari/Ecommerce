@@ -53,7 +53,7 @@ MIDDLEWARE = [
 ]
 
 AUTH_USER_MODEL = 'ecommerce_site.User'
-# ROOT_URLCONF = 'Ecommerce.urls'
+ROOT_URLCONF = 'Ecommerce.urls'
 
 TEMPLATES = [
     {
