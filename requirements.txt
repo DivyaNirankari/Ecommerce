@@ -59,6 +59,6 @@ tzdata==2021.5
 virtualenv==20.13.2
 virtualenvwrapper-win==1.2.7
 webencodings==0.5.1
-whitenoise==6.0.0
+whitenoise
 xhtml2pdf==0.2.6
 zipp==3.7.0
