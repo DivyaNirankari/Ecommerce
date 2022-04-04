@@ -81,7 +81,7 @@
                         {% comment %} <div class="summary-item"><span class="text">Total MRP</span><span class="price">{{cart.product.product_price}}</span></div><hr> {% endcomment %}
                         
                         {% comment %} <div class="summary-item"><span class="text">Shipping</span><span class="price"></span></div><hr> {% endcomment %}
-                        <div class="summary-item"><span class="text">Total Amount</span><span class="price">{{cart.get_final_price}}</span></div><hr>
+                        <div class="summary-item"><span class="text">Total Amount</span><span class="price">{{cart.get_total_cost}}</span></div><hr>
                         <a type="button" class="btn btn-primary btn-lg btn-block" href="{% url 'checkout'  %}">Checkout</a>
                     </div>
                 </div>
@@ -89,9 +89,9 @@
                             <div class="col-sm-6 col-md-4 col-lg-4">
                                 <h6>Your Cart is Empty..  </h6><br>
                                 <div class="Add-data">
-                                    <a type="button" href="{% url 'wishlist_data' %}" class="btn btn-outline-danger">Add from Wishlist</a>
+                                    <button href="{% url 'wishlist_data' %}" class="btn btn-outline-danger">Add from Wishlist</button>
                                 </div>
-                              </div>
+                              </div><br><br>
                             {% endif %}
             </div> 
     </div>

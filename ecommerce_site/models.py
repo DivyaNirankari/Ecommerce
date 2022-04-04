@@ -97,6 +97,7 @@ class Cart(models.Model):
         price=0
         price+=self.quantity*self.product.product_price
         # price=sum(self.get_final_price())
+        print(price)
         return price
     def get(self):
         return self.total_all_product_cost()
@@ -108,7 +109,6 @@ class OrderItems(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     item = models.ManyToManyField(Cart)  # Cart ID
     ordered = models.BooleanField(default=False)
-    # order_id=models.CharField(max_length=100,default=None,blank=True,null=True)
     address = models.TextField(max_length=500, default="address")
     city = models.TextField(max_length=20, default="city")
     zipcode = models.IntegerField(default=0)
@@ -120,7 +120,7 @@ class OrderItems(models.Model):
         return self.user.username
 
     def get_total_price(self):
-        total = 0
+        # total = 0
         for order_items in self.item.all():
             total += order_items.get(pk=self.pk)
 

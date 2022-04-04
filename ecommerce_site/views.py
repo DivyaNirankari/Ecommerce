@@ -325,7 +325,7 @@ def GenerateInvoice(request):
     result = BytesIO()
     pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
     pdf = result.getvalue()
-    filename = 'Invoice_Famms Online Shopping.pdf'
+    filename = 'Invoice Famms Online Shopping.pdf'
 
     mail_subject = 'Recent Order Details'
     context_dict = {
@@ -358,7 +358,8 @@ def validate_email(request):
             mail_subscription = SubscribedUsers.objects.create(email=email)
             mail_subscription.save()
             subject = 'NewsLetter Subscription'
-            message = f'This email was sent to '+email+'. You can unsubscribe to stop receiving all emails. By unsubscribing, you will no longer receive newsletters or offers.http://127.0.0.1:8000/unsubscribe_newsletter/.'
+            message = f'This email was sent to '+email + \
+                '. You can unsubscribe to stop receiving all emails. By unsubscribing, you will no longer receive newsletters or offers.http://127.0.0.1:8000/unsubscribe_newsletter/.'
             email_from = settings.EMAIL_HOST_USER
             recipient_list = [email, ]
             send_mail(subject, message, email_from, recipient_list)
@@ -367,6 +368,8 @@ def validate_email(request):
         else:
             messages.success(request, "Something Went Wrong")
             return redirect("ecommerce_site")
+
+
 def Unsubscribe(request):
-    email=request
+    email = request
     return HttpResponse(email)
