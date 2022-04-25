@@ -40,6 +40,7 @@ urlpatterns = [
     path("product_invoice/", views.GenerateInvoice, name="product_invoice"),
     #     --------------------PASSWORD UPDATIONS----------------------
     path('forget_password/', views.ForgetPassword, name="forget_password"),
+    path('forgetpassword/', views.Forgotpassword, name="forgetpassword"),
     path('change_password/<uid64>/<token>/',
          views.ChangePassword, name="change_password"),
     path("reset_done/", views.reset_done, name="reset_done"),

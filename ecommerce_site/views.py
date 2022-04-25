@@ -98,7 +98,6 @@ def User_Login(request):
         except Exception as e:
             print(e)
             messages.info(request, "Something Went Wrong")
-    return render(request, "User_Login.html")
 
 # ------------USER LOGOUT  -------------
 
@@ -256,7 +255,6 @@ def ForgetPassword(request):
 
     try:
         if request.method == 'POST':
-            # print("hlo")
             username = request.POST['username']
             if not User.objects.filter(username=username).first():
                 messages.success(
