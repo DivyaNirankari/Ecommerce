@@ -17,7 +17,7 @@ from django.core.mail import send_mail
 from django.http import HttpResponse
 from xhtml2pdf import pisa
 from django.template.loader import get_template
-import os 
+import os
 import csv
 
 
@@ -146,7 +146,7 @@ def Add_to_Cart(request, product_id):
         add_cart = Cart.objects.filter(
             product=product, user_id=request.user.id).update(
                 quantity=F('quantity')+1)
-        
+
         # add_cart.save()
         messages.success(request, 'Product Updated Successfully')
         return redirect("view_products")
@@ -182,6 +182,7 @@ def remove_fromcart(request, val):
             product=product, user_id=request.user.id).update(
                 quantity=F('quantity')-1)
     return HttpResponse("removed")
+
 
 def update_cart(request, val):
     product = Product.objects.get(id=val)
@@ -392,6 +393,3 @@ def validate_email(request):
 def Unsubscribe(request):
     email = request
     return HttpResponse(email)
-
-      
-        
