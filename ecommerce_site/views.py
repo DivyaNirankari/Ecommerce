@@ -1,7 +1,7 @@
 from __future__ import print_function
 from datetime import date
 import datetime
-import re
+import io
 from django.core.mail import EmailMultiAlternatives
 from io import BytesIO
 import uuid
@@ -17,7 +17,8 @@ from django.core.mail import send_mail
 from django.http import HttpResponse
 from xhtml2pdf import pisa
 from django.template.loader import get_template
-import os
+import os 
+import csv
 
 
 def index(request):
@@ -38,7 +39,7 @@ def Product_Category(request):
 
 def Order(request):
     cart = Cart.objects.filter(user=request.user.id)
-    total = Cart.objects.filter(user=request.user.id,is_deleted=False).count()
+    total = Cart.objects.filter(user=request.user.id, is_deleted=False).count()
     delivery_date = date.today()+datetime.timedelta(days=2)
     return render(request, "checkout.html", {'products': cart, 'total': total, 'delivery_date': delivery_date})
 
@@ -97,6 +98,7 @@ def User_Login(request):
         except Exception as e:
             print(e)
             messages.info(request, "Something Went Wrong")
+    return render(request, "User_Login.html")
 
 # ------------USER LOGOUT  -------------
 
@@ -138,13 +140,14 @@ def Product_details(request, pk):
 
 
 @login_required
-def Add_to_Cart(request, product_id,):
-    # print(qty)
+def Add_to_Cart(request, product_id):
     product = Product.objects.get(id=product_id)
+    print("HIIII")
     if(Cart.objects.filter(product=product, user_id=request.user.id).exists()):
         add_cart = Cart.objects.filter(
             product=product, user_id=request.user.id).update(
                 quantity=F('quantity')+1)
+        
         # add_cart.save()
         messages.success(request, 'Product Updated Successfully')
         return redirect("view_products")
@@ -172,6 +175,22 @@ def Remove_Cart(request, product_id):
         messages.success(request, 'Product Removed from cart')
         return redirect("cart_data")
 
+
+def remove_fromcart(request, val):
+    product = Product.objects.get(id=val)
+    if(Cart.objects.filter(product=product, user_id=request.user.id).exists()):
+        add_cart = Cart.objects.filter(
+            product=product, user_id=request.user.id).update(
+                quantity=F('quantity')-1)
+    return HttpResponse("removed")
+
+def update_cart(request, val):
+    product = Product.objects.get(id=val)
+    if(Cart.objects.filter(product=product, user_id=request.user.id).exists()):
+        add_cart = Cart.objects.filter(
+            product=product, user_id=request.user.id).update(
+                quantity=F('quantity')+1)
+    return HttpResponse("Added")
 
 # ---------------------------------- WISHLIST FUNCTIONALITIES ----------------------------------------------
 
@@ -237,6 +256,7 @@ def ForgetPassword(request):
 
     try:
         if request.method == 'POST':
+            # print("hlo")
             username = request.POST['username']
             if not User.objects.filter(username=username).first():
                 messages.success(
@@ -374,3 +394,6 @@ def validate_email(request):
 def Unsubscribe(request):
     email = request
     return HttpResponse(email)
+
+      
+        

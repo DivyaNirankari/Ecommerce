@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from . import views
 
 urlpatterns = [
@@ -28,6 +28,8 @@ urlpatterns = [
     path("remove_from_wishlist/<str:product_id>",
          views.Remove_Wishlist, name="remove_from_wishlist"),
     path("remove_cart/<int:product_id>", views.Remove_Cart, name="remove_cart"),
+    path("remove_fromCart/<int:val>",views.remove_fromcart, name="remove_fromCart"),
+    path("add_toCart/<int:val>",views.Add_to_Cart, name="remove_fromCart"),
     #     -----------------ORDER CONFIRMATION AND CHECKOUT---------------------------
     path("checkout/", views.Order, name="checkout"),
     path("checkout/<int:product_id", views.Order, name="checkout_all"),
@@ -46,5 +48,7 @@ urlpatterns = [
     #     ---------NEWSLETTER SUBSCRIBE----------
     path('email_subscribe/', views.validate_email, name='email_subscribe'),
     path('unsubscribe_newsletter/', views.Unsubscribe,
-         name="unsubscribe_newsletter")
+         name="unsubscribe_newsletter"),
+
+    
 ]

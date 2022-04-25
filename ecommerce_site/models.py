@@ -2,6 +2,7 @@
 from random import randint
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import Permission
 # Create your models here.
 
 active = "active"
@@ -37,7 +38,7 @@ class Product(models.Model):
     product_description = models.TextField(
         max_length=1000, default="Enter Product Description")
     product_price = models.IntegerField(default="Enter Product Price")
-    product_quantity = models.PositiveIntegerField()
+    product_quantity = models.PositiveIntegerField(max_length=100)
     product_status = models.CharField(choices=STATUS, max_length=100)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -61,7 +62,7 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 # -------------------------WISHLIST MODEL-----------------------
-
+#  u.user_permissions.add(permission)
 
 class Wishlist(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -137,9 +138,7 @@ class SubscribedUsers(models.Model):
     def __str__(self):
         return self.email
 
-# class MailModel(models.Model):
-#     title=models.CharField(max_length=20)
-#     message=models.TextField(max_length=500")
-    
-#     def __str__(self):
-#         return self.title
+class Rating(models.Model):
+    product=models.ForeignKey(Product,on_delete=models.CASCADE)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    ratings=models.IntegerField(default=0)

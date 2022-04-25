@@ -35,17 +35,10 @@
 
             <p>{{product.product_description}}</p>
             <br>
-            <form class="form" method="POST" action="" name="Quantity" id="Quantity" >
-              {% csrf_token%}
-             <fieldset>
-              <input type="number" placeholder="Enter Quantity" name="qty"  required />
-              </fieldset>
               <a class=" btn btn-danger" href="{% url 'add_to_wishlist' product.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
                 <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5ZM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1Zm0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
                 </svg></a>&nbsp;&nbsp;&nbsp;
                 <a  class="btn btn-danger "  href="{% url 'add_to_cart' product.id %}">Add to Bag </a>&nbsp;&nbsp;&nbsp;
-          </form>
-    
           </div>
         </div>
       </div>
@@ -55,7 +48,7 @@
           <h4 class="my-4 h4">Similar Products</h4>
         </div>
       </div>
-      <div class="row">
+      {% comment %} <div class="row">
         <div class="col-lg-4 col-md-12 mb-4">
           <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg" class="img-fluid" alt="">
 
@@ -71,7 +64,7 @@
 
         </div>
 
-      </div>
+      </div> {% endcomment %}
     </div>
 	{% endfor %}
   </main>

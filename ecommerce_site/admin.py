@@ -4,8 +4,10 @@ from django.utils.html import format_html
 from django.contrib.auth.admin import UserAdmin
 from ecommerce_site.models import *
 from django.template.defaultfilters import truncatechars
-
+from ecommerce_site import models
+from import_export.admin import ImportExportModelAdmin
 # Register your models here.
+
 # ------------------CATEGORY MODEL-------------------------
 
 class Category_data(admin.ModelAdmin):
@@ -20,6 +22,7 @@ class Category_data(admin.ModelAdmin):
     make_active.short_description = "Active Selected Category"
     
     def make_inactive(modeladmin, request, queryset):
+        # print(queryset)
         queryset.update(category_status='inactive')
     make_inactive.short_description = "Inactive Selected Products"
     
@@ -34,7 +37,7 @@ admin.site.register(Category,Category_data)
 
 # ------------------PRODUCT MODEL-------------------------
 
-class Product_data(admin.ModelAdmin):
+class Product_data(ImportExportModelAdmin,admin.ModelAdmin):
         
     def short_description(self,obj):
         return truncatechars(obj.product_description, 35)
@@ -53,7 +56,7 @@ class Product_data(admin.ModelAdmin):
     make_inactive.short_description = "Inactive Selected Products"
     
     list_display_links=("Image","product")
-    list_display=('id','Image','product','category_id','short_description','product_price','product_status','created_on','updated_on')
+    list_display=('id','Image','product','category_id','short_description','product_price','product_status','product_quantity','created_on','updated_on')
     list_filter = ['category_id','created_on','updated_on']
     list_per_page = 10
     search_fields=('product','category_id')
@@ -83,6 +86,7 @@ admin.site.register(Cart,CartData)
 
 class WishlistData(admin.ModelAdmin):
     list_display=('id','user','product','created_on')
+    list_display_links=("user",)
     ordering=('created_on','updated_on')
 admin.site.register(Wishlist,WishlistData)
 
@@ -91,6 +95,14 @@ admin.site.register(Wishlist,WishlistData)
 class Order_Items(admin.ModelAdmin):
     list_display=('id','user','address','city','zipcode','ordered_date','delivered_by','order_status')
     ordering=('ordered_date','delivered_by','order_status')
+    list_display_links=('id',"user",)
 admin.site.register(OrderItems,Order_Items)
 
 admin.site.register(SubscribedUsers)
+
+
+class Rating_data(admin.ModelAdmin):
+    list_display=('id','user','product','ratings')
+    list_display_links=("user")
+admin.site.register(Rating)
+    
